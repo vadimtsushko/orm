@@ -9,6 +9,8 @@ Future<String> absoluteSourcePath(Type type) async {
   if (uri.scheme == 'package') {
     uri = await Isolate.resolvePackageUri(uri);
   }
-
+  if (uri == null) {
+    return type.toString();
+  }      
   return uri.toFilePath() + '#' + MirrorSystem.getName(mirror.simpleName);
 }
